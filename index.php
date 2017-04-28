@@ -20,6 +20,7 @@
       <th>Last Name</th>
       <th>Bio</th>
       <th colspan="4" align="center">Actions</th>
+      <th colspan="4" align="center">Home image</th>
     </tr>
     <?php
     $query = "SELECT * FROM inventors";
