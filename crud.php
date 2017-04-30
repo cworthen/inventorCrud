@@ -11,17 +11,18 @@ function __construct($db_connect)
 }
 
 
-  public function create($firstname, $lastname, $bio, $home_image)
+  public function create($firstname, $lastname, $bio, $year, $filepath)
   {
 
 
       try
       {
-          $stmt = $this->db->prepare("INSERT INTO inventors (firstname,lastname,bio, home_image) VALUES (:firstname,:lastname,:bio,:home_image)");
+          $stmt = $this->db->prepare("INSERT INTO inventors (firstname,lastname,bio, year, filepath) VALUES (:firstname,:lastname,:bio, :year, :filepath)");
           $stmt->bindParam(':firstname', $firstname);
           $stmt->bindParam(':lastname',  $lastname);
           $stmt->bindParam(':bio',  $bio);
-          $stmt->bindParam(':home_image',  $bio);
+          $stmt->bindParam(':year',  $year);
+          $stmt->bindParam(':filepath',  $filepath);
           $stmt->execute();
           return true;
 
@@ -49,7 +50,7 @@ public function getID($id)
 
 
 
-public function update($id, $firstname, $lastname, $bio, $home_image)
+public function update($id, $firstname, $lastname, $bio, $year, $filepath)
 {
   try
 
@@ -57,7 +58,8 @@ public function update($id, $firstname, $lastname, $bio, $home_image)
   $stmt=$this->db->prepare("UPDATE inventors SET firstname=:firstname,
                                                  lastname=:lastname,
                                                  bio=:bio,
-                                                 home_image=:home_image
+                                                 year=:year,
+                                                 filepath=:filepath
 
 
              WHERE id=:id ");
@@ -65,7 +67,8 @@ public function update($id, $firstname, $lastname, $bio, $home_image)
         $stmt->bindParam(':firstname', $firstname);
         $stmt->bindParam(':lastname',  $lastname);
         $stmt->bindParam(':bio',  $bio);
-        $stmt->bindParam(':home_image',  $home_image);
+        $stmt->bindParam(':year',  $year);
+        $stmt->bindParam(':filepath',  $filepath);
         $stmt->bindParam(':id',  $id);
         $stmt->execute();
         return true;
@@ -109,6 +112,8 @@ public function dataview($query)
                <td><?php print($row['firstname']); ?></td>
                <td><?php print($row['lastname']); ?></td>
                <td><?php print($row['bio']); ?></td>
+               <td><?php print($row['year']); ?></td>
+
 
 
 
@@ -119,12 +124,12 @@ public function dataview($query)
                <a href="delete.php?delete_id=<?php print($row['id']); ?>">delete</a>
                </td>
                <td align="center">
-               <a href="home_image.php?delete_id=<?php print($row['id']); ?>">image</a>
+               <a href="home_image.php?image_id=<?php print($row['id']); ?>">image</a>
                </td>
                </tr>
                <?php
 
-                 
+
   }
  }
  else
@@ -136,6 +141,32 @@ public function dataview($query)
            <?php
  }
 
+}
+
+
+public function dataset($query) {
+
+  $stmt = $this->db->prepare($query);
+  $stmt->execute();
+  $jsonArray = array();
+
+  if($stmt->rowCount() > 0)
+  {
+
+    while($row=$stmt->fetch(PDO::FETCH_ASSOC)) {
+
+      array_push($jsonArray, array(
+        'id' => $row['id'],
+        'firstname' => $row['firstname'],
+        'lastname' => $row['lastname'],
+        'bio' => $row['bio'],
+        'year' => $row['year'],
+
+      ));
+
+    }
+  }
+	return json_encode($jsonArray);
 }
 
 }
