@@ -23,14 +23,16 @@ include_once 'header.php';
 //when submit button is clicked
 
 //select image for individual invention by id (home page)
-  //$id = $_GET['image_id'];
 
-  //$filepath=$_POST['filepath'];
+
+
 
 
 
 if(isset($_POST['btn-submit']))
 {
+  $id = $_GET['image_id'];
+  $filepath=$_POST['filepath'];
   $image_name = $_FILES['image']['name'];
   $image_location = $_FILES['image']['tmp_name'];
   $image_server_location ="pics/" . $image_name;

@@ -7,8 +7,7 @@ if(isset($_POST['btn-update']))
   $lastname = $_POST['lastname'];
   $bio = $_POST['bio'];
   $year = $_POST['year'];
-
-
+  
   if($db->update($id,$firstname,$lastname,$bio,$year))
 {
   $msg = "<div class='alert alert-info'>

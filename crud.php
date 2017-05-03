@@ -50,7 +50,7 @@ public function getID($id)
 
 
 
-public function update($id, $firstname, $lastname, $bio, $year, $filepath)
+public function update($id, $firstname, $lastname, $bio, $year)
 {
   try
 
@@ -59,7 +59,7 @@ public function update($id, $firstname, $lastname, $bio, $year, $filepath)
                                                  lastname=:lastname,
                                                  bio=:bio,
                                                  year=:year,
-                                                 filepath=:filepath
+
 
 
              WHERE id=:id ");
@@ -68,7 +68,6 @@ public function update($id, $firstname, $lastname, $bio, $year, $filepath)
         $stmt->bindParam(':lastname',  $lastname);
         $stmt->bindParam(':bio',  $bio);
         $stmt->bindParam(':year',  $year);
-        $stmt->bindParam(':filepath',  $filepath);
         $stmt->bindParam(':id',  $id);
         $stmt->execute();
         return true;
@@ -97,7 +96,7 @@ public function update($id, $firstname, $lastname, $bio, $year, $filepath)
         return false;
     }
   }
-  
+
 public function delete($id)
 {
   $stmt = $this->db->prepare("DELETE FROM inventors WHERE id=:id");
