@@ -71,6 +71,7 @@ if(isset($_GET['deleted_id']))
            <td><?php print($row['firstname']); ?></td>
            <td><?php print($row['lastname']); ?></td>
            <td><?php print($row['bio']); ?></td>
+           <td><?php print($row['year']); ?></td>
 
          </tr>
           <?php
