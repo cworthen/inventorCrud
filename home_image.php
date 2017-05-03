@@ -10,7 +10,7 @@ include_once 'header.php';
 
 <div class="container">
 
-<form method='post'>
+<form method='post' enctype="multipart/form-data">
 
 <input type="file" name="image" accept="image/jpeg, image/png">
 <input value="Submit" name='btn-submit' type="submit">
@@ -22,36 +22,29 @@ include_once 'header.php';
 
 //when submit button is clicked
 
+//select image for individual invention by id (home page)
+  //$id = $_GET['image_id'];
+
+  //$filepath=$_POST['filepath'];
+
+
+
 if(isset($_POST['btn-submit']))
 {
+  $image_name = $_FILES['image']['name'];
+  $image_location = $_FILES['image']['tmp_name'];
+  $image_server_location ="pics/" . $image_name;
 
-//select image for individual invention by id (home page)
-  $id = $_GET['image_id'];
+  if(move_uploaded_file($image_location, $image_server_location))
+  {
+    //Run Update or Insert Query
+    echo $db->update_with_image($image_id, $image_server_location);
+     echo "image uploaded successfully.";
+  }
+  else
+  {
+    //Image Failed to Upload
+    ?><script>alert('upload failed');</script><?php
+  }
 
-  $filepath = $_POST['filepath'];
-  $filetemp=$_FILES['image']['tmp_name'];
-  $filename=$_FILES['image']['name'];
-  $filetype=$_FILES['image']['type'];
-
-  //include image path and name
-  $filepath = "images/" . $filename;
-
-  move_uploaded_file($filetemp, $filepath);
-  //$file="/inventorapp/css/images/".$_FILES["image"]["name"];
-
-//insert image path into database column home_image
-$query = "INSERT INTO inventors (filepath) VALUES (:filepath)";
-
-//checking if image is uploaded to database
-if($query){
- echo $filename;
- echo "image uploaded successfully.";
-
-}
-else
-{
-
- echo "something went wrong, insert to database failed";
-
-   }
 }

@@ -83,6 +83,21 @@ public function update($id, $firstname, $lastname, $bio, $year, $filepath)
   }
   }
 
+
+  public function update_with_image($id, $filepath)
+  {
+    try {
+      $stmt=$this->db->prepare("UPDATE inventors SET filepath=:filepath WHERE id=:id ");
+      $stmt->bindParam(':filepath',  $filepath);
+      $stmt->bindParam(':id',  $id);
+      $stmt->execute();
+      return true;
+    } catch(PDOException $e) {
+        echo $e->getMessage();
+        return false;
+    }
+  }
+  
 public function delete($id)
 {
   $stmt = $this->db->prepare("DELETE FROM inventors WHERE id=:id");

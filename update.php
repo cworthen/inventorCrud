@@ -9,7 +9,6 @@ if(isset($_POST['btn-update']))
   $year = $_POST['year'];
 
 
-
   if($db->update($id,$firstname,$lastname,$bio,$year))
 {
   $msg = "<div class='alert alert-info'>
@@ -74,7 +73,7 @@ if(isset($msg))
             <td><input type='text' name='year' class='form-control' value="<?php echo $year; ?>" required></td>
         </tr>
 
-        
+
 
 
 
