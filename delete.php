@@ -57,6 +57,7 @@ if(isset($_GET['deleted_id']))
          <th>First Name</th>
          <th>Last Name</th>
          <th>Bio</th>
+         <th>Year</th>
          </tr>
          <?php
          $stmt = $db->prepare("SELECT * FROM inventors WHERE id=:id");

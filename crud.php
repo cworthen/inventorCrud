@@ -160,7 +160,7 @@ public function dataset($query) {
         'firstname' => $row['firstname'],
         'lastname' => $row['lastname'],
         'bio' => $row['bio'],
-        'year' => $row['year'],
+        'year' => $row['year']
 
       ));
 

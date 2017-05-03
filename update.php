@@ -6,9 +6,11 @@ if(isset($_POST['btn-update']))
   $firstname = $_POST['firstname'];
   $lastname = $_POST['lastname'];
   $bio = $_POST['bio'];
+  $year = $_POST['year'];
 
 
-  if($db->update($id,$firstname,$lastname,$bio))
+
+  if($db->update($id,$firstname,$lastname,$bio,$year))
 {
   $msg = "<div class='alert alert-info'>
    <strong>WOW!</strong> Record was updated successfully <a href='index.php'>HOME</a>!
@@ -66,6 +68,14 @@ if(isset($msg))
             <td>Bio</td>
             <td><input type='text' name='bio' class='form-control' value="<?php echo $bio; ?>" required></td>
         </tr>
+
+        <tr>
+            <td>Year</td>
+            <td><input type='text' name='year' class='form-control' value="<?php echo $year; ?>" required></td>
+        </tr>
+
+        
+
 
 
         <tr>

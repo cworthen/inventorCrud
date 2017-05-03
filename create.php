@@ -6,9 +6,10 @@ if(isset($_POST['btn-save']))
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $bio = $_POST['bio'];
+$year = $_POST['year'];
 
 
-if($db->create($firstname,$lastname,$bio))
+if($db->create($firstname,$lastname,$bio,$year))
 {
 header("Location: create.php?inserted");
 }
@@ -71,6 +72,11 @@ elseif(isset($_GET['failure']))
          <tr>
              <td>Bio</td>
              <td><input type='text' name='bio' class='form-control' required></td>
+         </tr>
+
+         <tr>
+             <td>Year</td>
+             <td><input type='text' name='year' class='form-control' required></td>
          </tr>
 
          <tr>

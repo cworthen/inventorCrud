@@ -1,0 +1,67 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <style>
+    .circle{
+      border-radius:50%;
+      width:50px;
+      height:50px;
+      background-color:red;
+      padding:5px;
+      margin:10px;
+    }
+
+    p{
+    text-align:center;
+    margin:0 auto;
+    padding-top:15px;
+    }
+
+
+    </style>
+  </head>
+  <body>
+
+  <div class="circle"><p>1</p></div>
+  <div class="circle"><p>1</p></div>
+    <div class="circle"><p>1</p></div>
+      <div class="circle"><p>4</p></div>
+  <script>
+
+function change(){
+  var circle = document.querySelectorAll('.circle');
+
+  var colors  = ['blue','yellow', 'green', 'pink'];
+
+  for(var i = 0; i < circle.length; i++) {
+      circle[i].style.backgroundColor = colors[i];
+
+    //  console.log('the color is now ' + colors[i]);
+  }
+
+  }
+
+  setInterval(change, 1000);
+
+
+ /*var i=0;
+
+  function change(){
+    var circle = document.querySelector('.circle');
+    var color  = ['blue','yellow', 'green', 'pink', 'purple', 'black', 'grey'];
+  circle.style.backgroundColor = color[i];
+  i = (i + 1) % color.length;
+}
+  setInterval(change, 1000);*/
+
+
+
+
+
+  </script>
+  </body>
+</html>
