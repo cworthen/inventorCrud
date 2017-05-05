@@ -11,18 +11,18 @@ function __construct($db_connect)
 }
 
 
-  public function create($firstname, $lastname, $bio, $year, $filepath)
+  public function create($firstname, $lastname, $bio, $year)
   {
 
 
       try
       {
-          $stmt = $this->db->prepare("INSERT INTO inventors (firstname,lastname,bio, year, filepath) VALUES (:firstname,:lastname,:bio, :year, :filepath)");
+          $stmt = $this->db->prepare("INSERT INTO inventors (firstname,lastname,bio, year) VALUES (:firstname,:lastname,:bio, :year)");
           $stmt->bindParam(':firstname', $firstname);
           $stmt->bindParam(':lastname',  $lastname);
           $stmt->bindParam(':bio',  $bio);
           $stmt->bindParam(':year',  $year);
-          $stmt->bindParam(':filepath',  $filepath);
+
           $stmt->execute();
           return true;
 
@@ -58,7 +58,7 @@ public function update($id, $firstname, $lastname, $bio, $year)
   $stmt=$this->db->prepare("UPDATE inventors SET firstname=:firstname,
                                                  lastname=:lastname,
                                                  bio=:bio,
-                                                 year=:year,
+                                                 year=:year
 
 
 
@@ -83,11 +83,11 @@ public function update($id, $firstname, $lastname, $bio, $year)
   }
 
 
-  public function update_with_image($id, $filepath)
+  public function update_with_home_image($id, $invention_image)
   {
     try {
-      $stmt=$this->db->prepare("UPDATE inventors SET filepath=:filepath WHERE id=:id ");
-      $stmt->bindParam(':filepath',  $filepath);
+      $stmt=$this->db->prepare("UPDATE inventors SET invention_image=:invention_image WHERE id=:id ");
+      $stmt->bindParam(':invention_image', $invention_image);
       $stmt->bindParam(':id',  $id);
       $stmt->execute();
       return true;
@@ -96,6 +96,21 @@ public function update($id, $firstname, $lastname, $bio, $year)
         return false;
     }
   }
+
+  public function update_with_inventor_image($id, $inventor_image)
+  {
+    try {
+      $stmt=$this->db->prepare("UPDATE inventors SET inventor_image=:inventor_image  WHERE id=:id ");
+      $stmt->bindParam(':inventor_image', $inventor_image);
+      $stmt->bindParam(':id',  $id);
+      $stmt->execute();
+      return true;
+    } catch(PDOException $e) {
+        echo $e->getMessage();
+        return false;
+    }
+  }
+
 
 public function delete($id)
 {
@@ -125,8 +140,10 @@ public function dataview($query)
                <td><?php print($row['id']); ?></td>
                <td><?php print($row['firstname']); ?></td>
                <td><?php print($row['lastname']); ?></td>
-               <td><?php print($row['bio']); ?></td>
+               <td colspan="3"><?php print($row['bio']); ?></td>
                <td><?php print($row['year']); ?></td>
+               <td><?php print($row['invention_image']); ?></td>
+               <td><?php print($row['inventor_image']); ?></td>
 
 
 
@@ -139,7 +156,10 @@ public function dataview($query)
                </td>
                <td align="center">
                <a href="home_image.php?image_id=<?php print($row['id']); ?>">image</a>
-               </td>
+              </td>
+             <td align="center">
+             <a href="inventor_image.php?image_id=<?php print($row['id']); ?>">image</a>
+             </td>
                </tr>
                <?php
 
@@ -174,13 +194,15 @@ public function dataset($query) {
         'firstname' => $row['firstname'],
         'lastname' => $row['lastname'],
         'bio' => $row['bio'],
-        'year' => $row['year']
+        'year' => $row['year'],
+        'invention_image'=> $row['invention_image'],
+        'inventor_image'=> $row['inventor_image']
 
       ));
 
     }
   }
-	return json_encode($jsonArray);
+	return json_encode($jsonArray, JSON_UNESCAPED_SLASHES);
 }
 
 }

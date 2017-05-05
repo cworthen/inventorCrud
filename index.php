@@ -18,21 +18,19 @@
       <th>#</th>
       <th>First Name</th>
       <th>Last Name</th>
-      <th>Bio</th>
+      <th colspan="3">Bio</th>
+      <th>Year</th>
+      <th>Home Image</th>
+      <th>Inventor Image</th>
+
       <th colspan="4" align="center">Actions</th>
-      <th colspan="4" align="center">Home image</th>
+
     </tr>
     <?php
     $query = "SELECT * FROM inventors";
     $db->dataview($query);
     ?>
-    <tr>
-            <td colspan="7" align="center">
-        <div class="pagination-wrap">
-                <?php //$db->paginglink($query,$records_per_page); ?>
-             </div>
-            </td>
-        </tr>
+    
 </table>
 </div>
 

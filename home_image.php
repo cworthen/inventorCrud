@@ -25,22 +25,18 @@ include_once 'header.php';
 //select image for individual invention by id (home page)
 
 
-
-
-
-
 if(isset($_POST['btn-submit']))
 {
-  $id = $_GET['image_id'];
-  $filepath=$_POST['filepath'];
+  $image_id = $_GET['image_id'];
+  $invention_image=$_POST['invention_image'];
   $image_name = $_FILES['image']['name'];
   $image_location = $_FILES['image']['tmp_name'];
-  $image_server_location ="pics/" . $image_name;
+  $image_server_location = '/Applications/MAMP/htdocs/inventorapp/images/' . $image_name;
 
   if(move_uploaded_file($image_location, $image_server_location))
   {
     //Run Update or Insert Query
-    echo $db->update_with_image($image_id, $image_server_location);
+    echo $db->update_with_home_image($image_id, 'images/'.$image_name);
      echo "image uploaded successfully.";
   }
   else

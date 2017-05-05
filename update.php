@@ -1,13 +1,18 @@
 <?php
 include_once 'config.php';
+
+
+
 if(isset($_POST['btn-update']))
 {
+
   $id = $_GET['edit_id'];
   $firstname = $_POST['firstname'];
   $lastname = $_POST['lastname'];
   $bio = $_POST['bio'];
   $year = $_POST['year'];
-  
+
+
   if($db->update($id,$firstname,$lastname,$bio,$year))
 {
   $msg = "<div class='alert alert-info'>
@@ -54,22 +59,22 @@ if(isset($msg))
 
         <tr>
             <td>First Name</td>
-            <td><input type='text' name='firstname' class='form-control' value="<?php echo $firstname; ?>" required></td>
+             <td><input type='text' name='firstname' class='form-control' value='<?php $firstname = " "; echo $firstname;?>' required></td>
         </tr>
 
         <tr>
             <td>Last Name</td>
-            <td><input type='text' name='lastname' class='form-control' value="<?php echo $lastname; ?>" required></td>
+            <td><input type='text' name='lastname' class='form-control' value='<?php $lastname = " "; echo $lastname;?>' required></td>
         </tr>
 
         <tr>
             <td>Bio</td>
-            <td><input type='text' name='bio' class='form-control' value="<?php echo $bio; ?>" required></td>
+            <td><input type='text' name='bio' class='form-control' value='<?php $bio = " "; echo $bio;?>' required></td>
         </tr>
 
         <tr>
             <td>Year</td>
-            <td><input type='text' name='year' class='form-control' value="<?php echo $year; ?>" required></td>
+            <td><input type='text' name='year' class='form-control' value='<?php $year = " "; echo $year;?>' required></td>
         </tr>
 
 

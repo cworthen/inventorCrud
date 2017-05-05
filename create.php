@@ -7,10 +7,10 @@ $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $bio = $_POST['bio'];
 $year = $_POST['year'];
-$filepath=$_POST['filepath'];
 
 
-if($db->create($firstname,$lastname,$bio,$year,$filepath))
+
+if($db->create($firstname,$lastname,$bio,$year))
 {
 header("Location: create.php?inserted");
 }

@@ -9,6 +9,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>title</title>
   <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+  <style>
+  .btn-info{
+    margin-top: 30px;
+    }
+  </style>
   </head>
   <body>
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -20,13 +25,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+          <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
